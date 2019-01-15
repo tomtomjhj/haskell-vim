@@ -54,6 +54,7 @@ syn match haskellImport "^\s*\<import\>\s\+\(\<safe\>\s\+\)\?\(\<qualified\>\s\+
   \ haskellOperators,
   \ haskellImportKeywords,
   \ haskellType,
+  \ haskellModPath,
   \ haskellLineComment,
   \ haskellBlockComment,
   \ haskellString,
@@ -77,6 +78,7 @@ syn match haskellQuotedType "[A-Z][a-zA-Z0-9_']*\>" contained
 syn region haskellQuoted start="\<'\+" end="\>"
   \ contains=
   \ haskellType,
+  \ haskellModPath,
   \ haskellQuote,
   \ haskellQuotedType,
   \ haskellSeparator,
@@ -130,6 +132,8 @@ if get(g:, 'haskell_enable_pattern_synonyms', 0)
   syn keyword haskellPatternKeyword pattern
 endif
 
+syn match haskellModPath "\u\(\w\|'\)*\."he=e-1
+
 highlight def link haskellBottom Macro
 highlight def link haskellTH Boolean
 highlight def link haskellIdentifier Identifier
@@ -157,8 +161,11 @@ highlight def link haskellTodo Todo
 highlight def link haskellPreProc PreProc
 highlight def link haskellAssocType Type
 highlight def link haskellQuotedType Type
-highlight def link haskellType Type
+" highlight def link haskellType Type
+highlight def link haskellType Constant
 highlight def link haskellImportKeywords Include
+" highlight def link haskellModPath Constant
+highlight def link haskellModPath Type
 if get(g:, 'haskell_classic_highlighting', 0)
   highlight def link haskellDeclKeyword Keyword
   highlight def link HaskellDerive Keyword
